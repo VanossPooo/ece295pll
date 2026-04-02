@@ -14,14 +14,12 @@ uint32_t lastRdivValue[3];
  *
  */
 
-void write(byte addr, byte data)
-{
-    // TODO: FL2 fill this in with
-    // start condition
-    // write I2C address for si5351 (SI5351_ADDR constant)
-    // write register address
-    // write register data
-    // stop condition
+void write(byte addr, byte data){
+    twi_start();               // Send I2C start condition
+    twi_MT_SLA_W(SI5351_ADDR); // Address the Si5351 for writing
+    twi_MT_write(addr);        // Send the register address
+    twi_MT_write(data);        // Send the data byte
+    twi_stop();                // Send I2C stop condition
 }
 
 /*
